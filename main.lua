@@ -2,7 +2,7 @@
 -- as in the space, our resoucers are limited: 
 --  Fuell, Oxygen, Water and food ar
 -- but they can be recharged doring the game, by buing them in stations, or picket up out in the space (planest, asteroids,...)
--- if needed the we can use all our inventory as fuell (imputse, we can expell oxigen, whater and food to contnuig moving)
+-- if needed the we can use all our inventory as fuell (impulse, we can expell oxigen, whater and food to contnuig moving)
 -- the fuell will decreas by uisng the acelerator, but also a tiny amount by time comusmed by the electricity inside the ship
 --  to mantain the electricity. oxigen and food and water will be consumed by time too.
 -- the game will be over if the tripulation is unable to move any more in the space and looses all the resources.
