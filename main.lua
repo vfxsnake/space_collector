@@ -17,9 +17,13 @@
 --      space parates (will try to lut your stuff by destroing you) siply Ai.
 --      employ tripulation, the ship will be faster but the comsuption of the resorces will be incremented.
 
+-- imports
+require("source/game_objects/character_actor")
+
 function love.load()
     -- initialization function 
-    local cargo_sheep = require("source.game_objects.base_sprite")
+    Player = CharacterActor
+    Player:set_base_color(255, 0, 255)
 end
 
 function love.update(dt)
@@ -29,4 +33,5 @@ end
 
 function love.draw()
 --  draws the graphics in the screen. (it can update the graphics as this function is call during the game loop.)
+    Player:draw()
 end
