@@ -7,8 +7,8 @@ BaseSpriteActor = {}
 BaseSpriteActor.__index = BaseSpriteActor
 BaseSpriteActor.pos_x = 0
 BaseSpriteActor.pos_y = 0
-BaseSpriteActor.size_width = 100
-BaseSpriteActor.size_heigth = 100
+BaseSpriteActor.size_width = 10
+BaseSpriteActor.size_heigth = 10
 BaseSpriteActor.sprite_texture_path = ""
 BaseSpriteActor.base_color = {r=255, g=255, b=225}
 
@@ -38,8 +38,8 @@ function BaseSpriteActor:setScale(width,height)
 end
 
 function BaseSpriteActor:get_sprite_center()
-    local center_x = BaseSpriteActor.pos_x - math.floor(self.size_width/2)
-    local center_y = BaseSpriteActor.pos_y - math.floor(self.size_heigth/2)
+    local center_x = self.pos_x - math.floor(self.size_width/2)
+    local center_y = self.pos_y - math.floor(self.size_heigth/2)
     return center_x, center_y
 end
 

@@ -23,15 +23,16 @@ require("source/game_objects/character_actor")
 function love.load()
     -- initialization function 
     Player = CharacterActor
-    Player:set_base_color(255, 0, 255)
 end
 
 function love.update(dt)
 -- update will update based in the user input
 -- dt is delta time and is a global variable that is updated by the love engine.
+    Player:update(dt)
 end
 
 function love.draw()
 --  draws the graphics in the screen. (it can update the graphics as this function is call during the game loop.)
     Player:draw()
+    love.graphics.print(tostring(Player.fuell))
 end
