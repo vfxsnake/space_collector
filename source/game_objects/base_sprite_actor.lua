@@ -32,7 +32,7 @@ function BaseSpriteActor:set_position(x, y)
     self.pos_x = x
     self.pos_y = y
 end
-function BaseSpriteActor:setScale(width,height)
+function BaseSpriteActor:set_scale(width,height)
     self.size_width = width
     self.size_heigth = height
 end
@@ -53,13 +53,23 @@ function BaseSpriteActor:set_base_color(r, g, b)
     self.base_color.b = b
 end
 
+function BaseSpriteActor:set_velocity(v_x, v_y)
+    self.vel_x = v_x
+    self.vel_y = v_y
+end
+
 function BaseSpriteActor:get_base_color()
     return self.base_color.r, self.base_color.g, self.base_color.b
 end
 
-function BaseSpriteActor:draw()
+function BaseSpriteActor:draw(shape_type)
 
     love.graphics.setColor(self.base_color.r, self.base_color.g, self.base_color.b)
     local center_x, center_y = self:get_sprite_center()
-    love.graphics.rectangle("line", center_x , center_y, self.size_width, self.size_heigth)
+    if shape_type == "rectangle" then
+        love.graphics.rectangle("fill", center_x , center_y, self.size_width, self.size_heigth)
+    else
+        love.graphics.circle("fill", self.pos_x, self.pos_y, self.size_width/2)
+    end
+
 end
