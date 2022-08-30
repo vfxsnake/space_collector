@@ -33,3 +33,6 @@ function CharacterActor:update(dt)
     self:set_position(self.pos_x + self.vel_x , self.pos_y + self.vel_y)
 end
 
+function CharacterActor:get_bounding_data()
+    return {x = self.pos_x, y = self.pos_y, rad = self.size_width/2}
+end

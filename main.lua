@@ -38,14 +38,14 @@ function love.load()
     
     -- init level spawner
     Level = Spawner
-    Level:spawn_actors(CargoActor, 100, MainWindow.width - 100, 100, MainWindow.height - 100)
+    Level:spawn_actors(CargoActor, 100, MainWindow.width - 200, 200, MainWindow.height - 200)
 end
 
 function love.update(dt)
 -- update will update based in the user input
 -- dt is delta time and is a global variable that is updated by the love engine.
     Player:update(dt)
-    Level:update(dt)
+    Level:update(dt, Player:get_bounding_data())
 end
 
 function love.draw()
