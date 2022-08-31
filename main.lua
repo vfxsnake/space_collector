@@ -50,6 +50,10 @@ end
 
 function love.draw()
 --  draws the graphics in the screen. (it can update the graphics as this function is call during the game loop.)
+    if Level.game_over then
+        love.graphics.print("a character died.")
+        return
+    end
     Player:draw('circle')
     love.graphics.print('Fuel: ' .. Player.fuel, 5, 5)
     Level:draw()
