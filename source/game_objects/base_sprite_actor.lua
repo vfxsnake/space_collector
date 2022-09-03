@@ -9,7 +9,7 @@ BaseSpriteActor.pos_x = 0
 BaseSpriteActor.pos_y = 0
 BaseSpriteActor.size_width = 10
 BaseSpriteActor.size_heigth = 10
-BaseSpriteActor.sprite_texture_path = ""
+BaseSpriteActor.sprite_texture_image = nil
 BaseSpriteActor.base_color = {r=255, g=255, b=225}
 
 --[[
@@ -44,7 +44,8 @@ function BaseSpriteActor:get_sprite_center()
 end
 
 function BaseSpriteActor:set_sprite_texture(image_path)
-    self.sprite_texture_path = image_path
+    local texture_object = love.graphics.newImage(image_path)
+    self.sprite_texture_image = texture_object
 end
 
 function BaseSpriteActor:set_base_color(r, g, b)
@@ -63,13 +64,13 @@ function BaseSpriteActor:get_base_color()
 end
 
 function BaseSpriteActor:draw(shape_type)
-
-    love.graphics.setColor(self.base_color.r, self.base_color.g, self.base_color.b)
     local center_x, center_y = self:get_sprite_center()
+    
+    love.graphics.setColor(self.base_color.r, self.base_color.g, self.base_color.b)
     if shape_type == "rectangle" then
         love.graphics.rectangle("fill", center_x , center_y, self.size_width, self.size_heigth)
     else
         love.graphics.circle("fill", self.pos_x, self.pos_y, self.size_width/2)
     end
-
+    love.graphics.setColor(255,255,255)
 end
