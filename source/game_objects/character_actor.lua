@@ -17,9 +17,17 @@ CharacterActor.oxigen = 10
 CharacterActor.stamina = 100
 CharacterActor.energy_comsumption = 0.01
 CharacterActor.resources_comsumption = 0.02
+CharacterActor.rotation = 0
 CharacterActor:set_scale(50, 50)
 CharacterActor:set_base_color(125, 0, 125)
 CharacterActor:set_sprite_texture("graphics/SpaceShip.png")
+
+function CharacterActor:new(instance)
+    instance = instance or {}   -- create object if user does not provide one
+    self.__index = self
+    setmetatable(instance, self)
+    return instance
+  end
 
 function CharacterActor:update(dt)
     if self.fuel > 0 then
@@ -33,6 +41,7 @@ function CharacterActor:update(dt)
         self.fuel = 0
     end
     self:set_position(self.pos_x + self.vel_x , self.pos_y + self.vel_y)
+    self.rotation = self:calculate_rotation()
 end
 function CharacterActor:draw()
 
@@ -40,7 +49,7 @@ function CharacterActor:draw()
         local width  = self.sprite_texture_image:getWidth()
 	    local height = self.sprite_texture_image:getHeight()
         local rotation = self:calculate_rotation()
-        love.graphics.draw(self.sprite_texture_image, self.pos_x, self.pos_y, rotation, 0.0512,0.0512, width/2, height/2)
+        love.graphics.draw(self.sprite_texture_image, self.pos_x, self.pos_y, self.rotation, 0.0512,0.0512, width/2, height/2)
     else
         BaseSpriteActor.draw(self)
     end
@@ -62,6 +71,6 @@ function CharacterActor:calculate_rotation()
     local dot_product = up_vector:dot(velocity)
     if self.vel_x > 0 then
         return math.acos(dot_product) 
-    end 
+    end
     return -math.acos(dot_product)
 end

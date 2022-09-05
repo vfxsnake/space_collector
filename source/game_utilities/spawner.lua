@@ -11,6 +11,13 @@ Spawner.max_stamina_consumpsion = 1.0
 Spawner.actor_array = {}
 Spawner.game_over = false
 
+function Spawner:new(instance)
+    instance = instance or {}   -- create object if user does not provide one
+    self.__index = self
+    setmetatable(instance, self)
+    return instance
+  end
+
 function Spawner:spawn_actors(actor_class, min_x, max_x, min_y, max_y)
     -- will spawn the actors ramdombly alogn the 
     -- screen space, the screen space has to be distretized
@@ -24,6 +31,10 @@ function Spawner:spawn_actors(actor_class, min_x, max_x, min_y, max_y)
         new_actor:set_velocity(vel_x, vel_y)
         new_actor.stamina = self:get_random_stamina()
         new_actor.reasource_usage = self:get_random_stamina_compsuption()
+        new_actor.rotation_speed = self.get_random_rotation_speed()
+        local max_index = #new_actor.sprite_list
+        local random_index = self.get_random_index(max_index)
+        new_actor:set_sprite_texture(new_actor.sprite_list[random_index])
 
         table.insert(self.actor_array, new_actor)
     end
@@ -47,6 +58,14 @@ end
 
 function Spawner:get_random_stamina_compsuption()
     return math.random(self.min_stamina_consumpsion, self.max_stamina_consumpsion)
+end
+
+function Spawner.get_random_rotation_speed()
+    return math.random(-1.5, 1.5)
+end
+
+function Spawner.get_random_index(max_index)
+    return math.random(1,max_index)
 end
 
 function Spawner:update(dt, bounding_data)

@@ -1,4 +1,4 @@
--- space collector or sapce delivery not decided yet.....
+-- space rescuer or sapce delivery not decided yet.....
 -- as in the space, our resoucers are limited: 
 --  Fuell, Oxygen, Water and food,
 -- but they can be recharged doring the game, pick them up out in the space (planest, asteroids,...)
@@ -28,32 +28,70 @@ if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
     require("lldebugger").start()
   end
 
+StartTime = 0
+ElapsedTime = 0
+
 function love.load()
     -- initialization function 
     -- setup main window
     MainWindow = Window
     MainWindow:setup()
     -- init player
-    Player = CharacterActor
-    
+    Player = CharacterActor:new()
+    Player:set_position(100, 100)
     -- init level spawner
-    Level = Spawner
+    Level = Spawner:new()
+    Level.number_of_instances = 5
+    Level.actor_array = {}
     Level:spawn_actors(CargoActor, 100, MainWindow.width - 200, 200, MainWindow.height - 200)
+    StartTime = love.timer.getTime()
 end
 
 function love.update(dt)
 -- update will update based in the user input
--- dt is delta time and is a global variable that is updated by the love engine.
+-- dt is delta time and is a global variable that is updated by the love engine. 
+    ExitGame()
+    GameRestart()
     Player:update(dt)
     Level:update(dt, Player:get_bounding_data())
 end
 
 function love.draw()
 --  draws the graphics in the screen. (it can update the graphics as this function is call during the game loop.)
-    -- if Level.game_over then
-    --     love.graphics.print("a character died.")
-    --     return
-    -- end
+    if Level.game_over then
+        
+        love.graphics.print("A tripulation member is out of reach...", 400, 400)
+        return
+    end
+    if Win() then
+        if ElapsedTime ==0 then
+            ElapsedTime = love.timer.getTime() - StartTime
+        end
+        
+        love.graphics.print("you resque all the tripulation Thanks!!!", 200,200,0, 1,1)
+        love.graphics.print( "Time: " .. ElapsedTime, 400, 400, 0, 1,1)
+        return
+    end
     Player:draw('circle')
     Level:draw()
+end
+
+function ExitGame()
+    if love.keyboard.isDown("escape") then
+        love.event.quit()
+    end
+end
+
+function GameRestart()
+    if love.keyboard.isDown("r") then
+        
+        love.load()
+    end
+end
+
+function Win()
+    if #Level.actor_array == 0 then
+        return true
+    end
+    return false
 end

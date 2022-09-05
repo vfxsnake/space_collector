@@ -31,3 +31,4 @@ function CharacterController:move(current_vel_x, current_vel_y)
     end
     return vel_x, vel_y, used_force
 end
+
