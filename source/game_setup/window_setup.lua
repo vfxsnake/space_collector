@@ -14,7 +14,7 @@ function Window:setup()
     love.window.setMode(self.width,
                         self.height,
                         {resizable=self.resizable,
-                         vsync=0,
+                         vsync=false,
                          minwidth=self.min_width,
                          minheight=self.min_height})
 end
