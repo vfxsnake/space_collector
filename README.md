@@ -2,7 +2,7 @@
 #### Video Demo:  <https://youtu.be/YjoCH4FO_II>
 #### Description:
 Simple game to Rescue the tribulation that has been ejected from a ship by mistake.
-You are in the sace so the fisic you can use is just impulse but sadly this ship can
+You are in the sace so the phisics you can use is just impulse but sadly this ship can
 only impulsed by 4 moves up, down, left and right, it has a break function (space bar)
 The impulse is cumulative so each time you add impulse the ship will go faster.
 yo*u can escape the game with "ESC" and restart it by "r"
